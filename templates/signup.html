@@ -1,89 +1,31 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Signup - Pantry Tracker</title>
+    <title>Sign Up</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
-    <script src="{{ url_for('static', filename='script.js') }}" defer></script>
 </head>
-<body class="signup-page">
-    <div class="form-container">
-        <h2>Signup</h2>
-        <form id="signupForm">
-            <div class="form-group">
-                <label for="name">Name</label>
-                <input type="text" id="name" required>
-            </div>
-            <div class="form-group">
-                <label for="email">Email</label>
-                <input type="email" id="email" required>
-            </div>
-            <div class="form-group">
-                <label for="password">Password</label>
-                <input type="password" id="password" required>
-                <span class="toggle-password" onclick="togglePasswordVisibility('password')">👁️</span>
-                <div class="error" id="passwordError"></div>
-            </div>
-            <div class="form-group">
-                <label for="retype-password">Retype Password</label>
-                <input type="password" id="retype-password" required>
-                <div class="error" id="retypePasswordError"></div>
-            </div>
-            <div class="button-container">
-                <button type="submit">Signup</button>
-            </div>
+<body>
+    <div class="container">
+        <h1>Sign Up</h1>
+        <form method="post" action="{{ url_for('signup') }}">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required>
+            
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+            
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+            
+            <label for="retype_password">Retype Password:</label>
+            <input type="password" id="retype_password" name="retype_password" required>
+            
+            <label for="shop_name">Shop Name:</label>
+            <input type="text" id="shop_name" name="shop_name" required>
+            
+            <button type="submit">Sign Up</button>
         </form>
+        <p><a href="{{ url_for('login') }}">Already have an account? Login here</a></p>
     </div>
-    <script>
-        function togglePasswordVisibility(id) {
-            const passwordField = document.getElementById(id);
-            const type = passwordField.type === 'password' ? 'text' : 'password';
-            passwordField.type = type;
-        }
-
-        document.getElementById('signupForm').addEventListener('submit', function(event) {
-            event.preventDefault();
-            const password = document.getElementById('password').value;
-            const retypePassword = document.getElementById('retype-password').value;
-            const passwordError = document.getElementById('passwordError');
-            const retypePasswordError = document.getElementById('retypePasswordError');
-
-            passwordError.textContent = '';
-            retypePasswordError.textContent = '';
-
-            let valid = true;
-
-            if (!/^.{8,}$/.test(password)) {
-                passwordError.textContent = 'Password must be at least 8 characters long.';
-                valid = false;
-            }
-
-            if (password !== retypePassword) {
-                retypePasswordError.textContent = 'Passwords do not match.';
-                valid = false;
-            }
-
-            if (valid) {
-                // Proceed with form submission
-                const name = document.getElementById('name').value;
-                fetch('/signup', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({ name, email: document.getElementById('email').value, password })
-                })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.success) {
-                        window.location.href = '/login';
-                    } else {
-                        alert('Signup failed');
-                    }
-                });
-            }
-        });
-    </script>
 </body>
 </html>

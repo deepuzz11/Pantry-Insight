@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pantry Tracker</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
-    <script src="{{ url_for('static', filename='script.js') }}" defer></script>
 </head>
 <body>
     <header class="header">
@@ -16,13 +15,14 @@
                 <li><a href="#features">Features</a></li>
                 <li><a href="#about">About</a></li>
                 <li><a href="#contact">Contact</a></li>
+                <li><a href="{{ url_for('manage') }}">Manage Pantry Items</a></li>
                 <li><a href="{{ url_for('logout') }}">Logout</a></li>
             </ul>
         </nav>
     </header>
     <main>
         <section id="intro">
-            <h2>Welcome to Pantry Tracker</h2>
+            <h2>Intro</h2>
             <p>Manage your pantry efficiently with our easy-to-use application. Add, remove, and update items seamlessly.</p>
         </section>
         <section id="features">
@@ -31,26 +31,18 @@
                 <li>Add, remove, and update items in your pantry.</li>
                 <li>Search and filter items quickly.</li>
                 <li>Track quantities to ensure you never run out.</li>
-                <li>Get recipe suggestions based on your pantry contents.</li>
-                <li>Upload images of pantry items for better organization.</li>
+                <li>Track quantities to ensure you never run out.</li>
+                <li>Receive notifications for low stock.</li>
             </ul>
         </section>
         <section id="about">
             <h2>About</h2>
-            <p>Pantry Tracker is developed to help individuals and families keep track of their pantry items with ease. Our mission is to provide a simple and effective solution for managing pantry inventories, reducing food waste, and ensuring you always have what you need.</p>
+            <p>Our application is designed to help you keep your pantry organized and your kitchen running smoothly. We prioritize simplicity and usability to provide the best experience.</p>
         </section>
         <section id="contact">
             <h2>Contact</h2>
-            <ul>
-                <li><a href="https://twitter.com">Twitter</a></li>
-                <li><a href="https://facebook.com">Facebook</a></li>
-                <li><a href="https://instagram.com">Instagram</a></li>
-                <li><a href="https://github.com">GitHub</a></li>
-            </ul>
+            <p>Have any questions or feedback? Reach out to us at <a href="mailto:support@pantrytracker.com">support@pantrytracker.com</a>.</p>
         </section>
     </main>
-    <footer>
-        <p>© Pantry Tracker. Design: HTML5 UP.</p>
-    </footer>
 </body>
 </html>

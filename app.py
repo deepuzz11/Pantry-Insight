@@ -1,7 +1,6 @@
 from flask import Flask, render_template, request, redirect, url_for, session, flash
 from pymongo import MongoClient
 from bson.objectid import ObjectId
-import bcrypt
 from werkzeug.security import generate_password_hash, check_password_hash
 
 app = Flask(__name__)
@@ -45,7 +44,7 @@ def signup():
         password = request.form['password']
         retype_password = request.form['retype_password']
         shop_name = request.form['shop_name']
-        
+
         if password != retype_password:
             flash('Passwords do not match')
             return render_template('signup.html')
