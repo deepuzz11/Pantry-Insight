@@ -186,3 +186,216 @@ footer {
         padding: 10px 5%;
     }
 }
+
+/* Login Page Styles */
+.login-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: rgba(0, 0, 0, 0.5) url('{{ url_for('static', filename='images/logo.jpg') }}') no-repeat center center fixed;
+    background-size: cover;
+    padding: 20px;
+}
+
+.form-container {
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 8px;
+    padding: 30px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+    position: relative;
+}
+
+h2 {
+    text-align: center;
+    color: #5d041a;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.form-group input[type="password"] {
+    position: relative;
+}
+
+.form-group input[type="password"] + .toggle-password {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+}
+
+.button-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+button {
+    background: #5d041a;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background 0.3s ease;
+}
+
+button:hover {
+    background: #3b020a;
+}
+
+/* Links Container Styles */
+.links-container {
+    text-align: center;
+    margin-top: 15px;
+}
+
+.links-container a {
+    color: #5d041a;
+    text-decoration: none;
+    font-size: 0.875rem;
+    margin: 0 10px;
+    display: inline-block;
+}
+
+.links-container a:hover {
+    text-decoration: underline;
+}
+
+/* Signup Page Styles */
+.signup-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: rgba(0, 0, 0, 0.5) url('{{ url_for('static', filename='images/logo.jpg') }}') no-repeat center center fixed;
+    background-size: cover;
+    padding: 20px;
+}
+
+.signup-form-container {
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 8px;
+    padding: 30px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+}
+
+.signup-form-container h2 {
+    text-align: center;
+    color: #5d041a;
+}
+
+.signup-form-container .form-group {
+    margin-bottom: 15px;
+}
+
+.signup-form-container .form-group label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.signup-form-container .form-group input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.signup-form-container .form-group input[type="password"] {
+    position: relative;
+}
+
+.signup-form-container .form-group input[type="password"] + .toggle-password {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+}
+
+.signup-button-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.signup-button-container button {
+    background: #5d041a;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background 0.3s ease;
+}
+
+.signup-button-container button:hover {
+    background: #3b020a;
+}
+
+/* Error Messages */
+.error {
+    color: red;
+    font-size: 0.875rem;
+    margin-top: 10px;
+}
+
+/* Password Requirements */
+.password-requirements {
+    margin-top: 10px;
+    font-size: 0.875rem;
+    color: #5d041a;
+}
+
+.password-requirements ul {
+    padding-left: 20px;
+    margin: 0;
+    list-style-type: disc;
+}
+
+.password-requirements ul {
+    padding-left: 20px;
+    margin: 0;
+    list-style-type: disc;
+}
+
+.password-requirements li {
+    margin-bottom: 5px;
+}
+
+/* Responsive Styles for Login and Signup Pages */
+@media (max-width: 768px) {
+    .login-page, .signup-page {
+        padding: 10px;
+    }
+
+    .form-container, .signup-form-container {
+        padding: 20px;
+    }
+}
+

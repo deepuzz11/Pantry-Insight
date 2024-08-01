@@ -21,10 +21,14 @@ document.addEventListener('DOMContentLoaded', function () {
             .then(response => response.json())
             .then(data => {
                 if (data.success) {
-                    window.location.href = '/manage';
+                    window.location.href = '/index';  // Updated URL
                 } else {
                     alert('Login failed');
                 }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('An error occurred');
             });
         });
     }
@@ -49,6 +53,10 @@ document.addEventListener('DOMContentLoaded', function () {
                 } else {
                     alert('Signup failed');
                 }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('An error occurred');
             });
         });
     }
@@ -73,6 +81,10 @@ document.addEventListener('DOMContentLoaded', function () {
                 } else {
                     alert('Operation failed');
                 }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('An error occurred');
             });
         });
     }
