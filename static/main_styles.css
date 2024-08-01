@@ -4,38 +4,69 @@ body {
     line-height: 1.6;
     margin: 0;
     padding: 0;
-    color: #660033;
-    background-color: #fff0db;
+    color: #56012c;
+    background-color: #fabcdb;
+    background-size: cover;
+    position: relative;
+    transition: background-color 0.5s ease;
+}
+
+body::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #fabcdb;
+    z-index: -1;
+}
+
+/* Container to hold content */
+.container {
+    position: relative;
+    z-index: 1;
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+    transition: padding 0.3s ease;
 }
 
 /* Header Styles */
 .header {
-    background: #660033;
-    color: #fff;
-    padding: 10px 0;
-    text-align: left;
     display: flex;
     align-items: center;
-    justify-content: space-between;
-}
-
-.header h1 {
-    margin: 0;
-    font-size: 2.5rem;
+    justify-content: flex-start;
+    padding: 20px;
+    background: rgba(102, 0, 51, 0.8); /* Adjust transparency here */
+    color: #fabcdb;
+    position: relative;
+    z-index: 2;
+    transition: background 0.3s ease;
 }
 
 .header img {
     max-width: 150px;
     height: auto;
-    margin-left: 20px;
+    margin-right: 20px;
+    transition: transform 0.3s ease;
 }
 
-/* Navbar Styles */
+.header img:hover {
+    transform: scale(1.1) rotate(5deg);
+}
+
 .navbar {
+    flex-grow: 1;
     display: flex;
-    justify-content: center;
-    background: #80334d;
+    justify-content: space-around;
+    background: rgba(128, 51, 77, 0.8); /* Adjust transparency here */
     padding: 10px 0;
+    transition: background 0.3s ease;
+}
+
+.navbar:hover {
+    background: rgba(153, 51, 102, 0.8); /* Adjust transparency here */
 }
 
 .navbar ul {
@@ -47,35 +78,83 @@ body {
 
 .navbar ul li {
     margin: 0 15px;
+    position: relative;
 }
 
 .navbar ul li a {
     text-decoration: none;
     color: #fff;
     padding: 7px 15px;
-    background: #993366;
+    background: rgba(153, 51, 102, 0.8); /* Adjust transparency here */
     border-radius: 4px;
+    transition: background 0.3s ease, transform 0.3s ease;
 }
 
 .navbar ul li a:hover {
-    background: #b34d80;
+    background-color: #fabcdb;
+    transform: scale(1.05);
 }
 
 /* Main Content Styles */
 main {
     padding: 20px;
+    background-color: #fabcdb;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    transition: padding 0.3s ease, background-color 0.3s ease;
 }
 
-/* Section Styles */
-section {
+main:hover {
+    background-color: #fce0e8;
+}
+
+main section {
     margin: 20px 0;
+    padding: 20px;
+    background: #d179a5;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 0.5s forwards;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-section img {
+main section:hover {
+    transform: translateY(0);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+main section:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+main section:nth-child(3) {
+    animation-delay: 0.4s;
+}
+
+main section:nth-child(4) {
+    animation-delay: 0.6s;
+}
+
+@keyframes fadeInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+main section img {
     max-width: 50%;
     height: auto;
     display: block;
     margin: 10px auto;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+main section img:hover {
+    transform: scale(1.05);
+    opacity: 0.8;
 }
 
 /* Form Styles */
@@ -86,23 +165,31 @@ form {
 form input {
     padding: 10px;
     margin-right: 10px;
-    border: 1px solid #660033;
+    border: 1px solid #fabcdb;
     border-radius: 4px;
-    color: #660033;
-    background-color: #fff0db;
+    color: #53051d;
+    background-color: #fabcdb;
+    transition: border 0.3s ease, background-color 0.3s ease;
+}
+
+form input:focus {
+    border-color: #fabcdb;
+    background-color: #ffe0e8;
 }
 
 form button {
     padding: 10px 20px;
     border: none;
     border-radius: 4px;
-    background-color: #660033;
-    color: #fff;
+    background-color: #56012c;
+    color: #fabcdb;
     cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
 form button:hover {
     background-color: #80334d;
+    transform: scale(1.05);
 }
 
 /* Pantry List Styles */
@@ -113,7 +200,13 @@ form button:hover {
 
 #pantry-list li {
     padding: 10px;
-    border-bottom: 1px solid #660033;
+    border-bottom: 1px solid #56012c;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+#pantry-list li:hover {
+    background-color: #ffe6cc;
+    transform: translateX(10px);
 }
 
 /* Button Styles */
@@ -121,23 +214,30 @@ button {
     padding: 10px 20px;
     border: none;
     border-radius: 4px;
-    background-color: #660033;
-    color: #fff;
+    background-color: #56012c;
+    color: #fabcdb;
     cursor: pointer;
     margin-top: 20px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
 button:hover {
     background-color: #80334d;
+    transform: scale(1.05);
 }
 
 /* Footer Styles */
 footer {
     text-align: center;
     padding: 10px 0;
-    background: #660033;
+    background: rgba(102, 0, 51, 0.8); /* Adjust transparency here */
     color: #fff;
     margin-top: 20px;
+    transition: background 0.3s ease;
+}
+
+footer:hover {
+    background: rgba(128, 51, 77, 0.8); /* Adjust transparency here */
 }
 
 footer ul {
@@ -153,21 +253,19 @@ footer ul li {
 footer ul li a {
     text-decoration: none;
     color: #fff;
+    transition: color 0.3s ease;
 }
 
 footer ul li a:hover {
     text-decoration: underline;
+    color: #ffd700;
 }
 
 /* Responsive Design */
 @media (max-width: 768px) {
-    .header h1 {
-        font-size: 2rem;
-    }
-
     .header img {
         max-width: 120px;
-        margin-left: 10px;
+        margin-right: 10px;
     }
 
     .navbar ul li {
@@ -178,7 +276,7 @@ footer ul li a:hover {
         padding: 5px 10px;
     }
 
-    section img {
+    main section img {
         max-width: 70%;
     }
 
@@ -194,10 +292,6 @@ footer ul li a:hover {
 }
 
 @media (max-width: 480px) {
-    .header h1 {
-        font-size: 1.5rem;
-    }
-
     .header img {
         max-width: 100px;
     }
@@ -210,7 +304,7 @@ footer ul li a:hover {
         padding: 5px 7px;
     }
 
-    section img {
+    main section img {
         max-width: 90%;
     }
 

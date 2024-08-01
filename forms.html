@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Booking Form</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+        padding: 20px;
+        background-color: #f4f4f4;
+    }
+    form {
+        max-width: 700px;
+        margin: auto;
+        padding: 20px;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        background: #fff;
+    }
+    h2 {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+    .form-group {
+        margin-bottom: 15px;
+    }
+    .form-group label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: bold;
+    }
+    .form-group input[type="text"],
+    .form-group input[type="email"],
+    .form-group input[type="date"],
+    .form-group input[type="time"],
+    .form-group input[type="number"],
+    .form-group input[type="file"],
+    .form-group textarea,
+    .form-group select {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
+    .form-group input[type="range"] {
+        width: 100%;
+    }
+    .form-group .required:after {
+        content: "*";
+        color: red;
+        margin-left: 5px;
+    }
+    .form-group .info {
+        font-size: 0.9em;
+        color: #666;
+    }
+    button {
+        display: block;
+        width: 100%;
+        background-color: #4CAF50;
+        color: white;
+        padding: 15px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 1em;
+        margin-top: 10px;
+    }
+    button:hover {
+        background-color: #45a049;
+    }
+</style>
+</head>
+<body>
+
+<form id="bookingForm" action="/submit_booking.php" method="post" enctype="multipart/form-data">
+    <h2>Booking Form</h2>
+
+    <div class="form-group">
+        <label for="name" class="required">Name:</label>
+        <input type="text" id="name" name="name" required>
+    </div>
+
+    <div class="form-group">
+        <label for="email" class="required">Email:</label>
+        <input type="email" id="email" name="email" required>
+    </div>
+
+    <div class="form-group">
+        <label for="date" class="required">Date:</label>
+        <input type="date" id="date" name="date" required>
+    </div>
+
+    <div class="form-group">
+        <label for="time" class="required">Time:</label>
+        <input type="time" id="time" name="time" required>
+    </div>
+
+    <div class="form-group">
+        <label for="quantity" class="required">Quantity:</label>
+        <input type="number" id="quantity" name="quantity" min="1" required>
+    </div>
+
+    <div class="form-group">
+        <label for="message">Message:</label>
+        <textarea id="message" name="message" rows="4"></textarea>
+    </div>
+
+    <div class="form-group">
+        <label for="file">Upload File:</label>
+        <input type="file" id="file" name="file" accept=".pdf,.doc,.docx">
+        <small class="info">Accepted formats: .pdf, .doc, .docx</small>
+    </div>
+
+    <div class="form-group">
+        <label for="priority">Priority:</label>
+        <input type="range" id="priority" name="priority" min="1" max="10" value="5">
+        <small class="info">1 = Low, 10 = High</small>
+    </div>
+
+    <div class="form-group">
+        <label for="payment" class="required">Payment Method:</label>
+        <select id="payment" name="payment" required>
+            <option value="credit">Credit Card</option>
+            <option value="debit">Debit Card</option>
+            <option value="paypal">PayPal</option>
+            <option value="bank">Bank Transfer</option>
+        </select>
+    </div>
+
+    <button type="submit">Submit</button>
+</form>
+
+<script>
+    document.getElementById('bookingForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+        alert('Thank you for your booking! We will process your request and get back to you soon.');
+        setTimeout(function() {
+            window.location.reload();
+        }, 1000);
+    });
+</script>
+
+</body>
+</html>
