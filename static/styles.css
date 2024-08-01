@@ -62,3 +62,14 @@ a {
 a:hover {
     text-decoration: underline;
 }
+
+.flash-messages {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.flash-messages li {
+    color: red;
+    margin-bottom: 10px;
+}

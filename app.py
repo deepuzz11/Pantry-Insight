@@ -44,12 +44,12 @@ def signup():
         password = request.form['password']
         retype_password = request.form['retype_password']
         shop_name = request.form['shop_name']
-
+        
         if password != retype_password:
             flash('Passwords do not match')
             return render_template('signup.html')
 
-        hashed_password = generate_password_hash(password, method='sha256')
+        hashed_password = generate_password_hash(password, method='pbkdf2:sha256')
 
         try:
             users.insert_one({
@@ -70,7 +70,7 @@ def forgot_password():
         new_password = request.form['new_password']
         user = users.find_one({'email': email})
         if user:
-            hashed_password = generate_password_hash(new_password, method='sha256')
+            hashed_password = generate_password_hash(new_password, method='pbkdf2:sha256')
             users.update_one({'email': email}, {'$set': {'password': hashed_password}})
             flash('Password updated successfully. Please log in with your new password.')
             return redirect(url_for('login'))
