@@ -1,6 +1,6 @@
 body {
     font-family: Arial, sans-serif;
-    background-color: #fff0db;
+    background-color: #f4e8ca;
     margin: 0;
     padding: 0;
 }
@@ -10,12 +10,12 @@ body {
     max-width: 500px;
     margin: 50px auto;
     padding: 20px;
-    background: #ffdeaf;
+    background: #fff;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-h1 {
+h1, h2 {
     margin-top: 0;
     font-size: 24px;
     text-align: center;
@@ -64,12 +64,8 @@ a:hover {
 }
 
 .flash-messages {
-    list-style-type: none;
+    list-style: none;
     padding: 0;
-    margin: 0;
-}
-
-.flash-messages li {
+    margin: 20px 0;
     color: red;
-    margin-bottom: 10px;
 }

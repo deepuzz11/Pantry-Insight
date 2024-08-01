@@ -2,13 +2,14 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='logo.ico') }}">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pantry Tracker</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='main_styles.css') }}">
 </head>
 <body>
     <header class="header">
-        <img src="{{ url_for('static', filename='images/logo.jpg') }}" alt="Pantry Tracker Logo">
+        <img src="{{ url_for('static', filename='logo.jpg') }}" alt="Pantry Tracker Logo">
         <nav class="navbar">
             <ul>
                 <li><a href="#intro">Intro</a></li>
@@ -31,7 +32,6 @@
                 <li>Add, remove, and update items in your pantry.</li>
                 <li>Search and filter items quickly.</li>
                 <li>Track quantities to ensure you never run out.</li>
-                <li>Track quantities to ensure you never run out.</li>
                 <li>Receive notifications for low stock.</li>
             </ul>
         </section>
@@ -41,8 +41,15 @@
         </section>
         <section id="contact">
             <h2>Contact</h2>
-            <p>Have any questions or feedback? Reach out to us at <a href="mailto:support@pantrytracker.com">support@pantrytracker.com</a>.</p>
+            <p>Have any questions or feedback? Reach out at <a href="mailto:deepikaprabhakaran11@gmail.com">support@pantrytracker.com</a>.</p>
         </section>
     </main>
+    <footer>
+        <ul>
+            <li><a href="#">Privacy Policy</a></li>
+            <li><a href="#">Terms of Service</a></li>
+        </ul>
+        <p>&copy; 2024 Pantry Tracker</p>
+    </footer>
 </body>
 </html>
