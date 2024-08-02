@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for, session, flash
+from flask import Flask, render_template, request, redirect, url_for, session, flash, jsonify
 from pymongo import MongoClient
 from bson.objectid import ObjectId
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -94,6 +94,24 @@ def manage():
     
     user_items = list(items.find({'user_id': ObjectId(user_id)}))
     return render_template('manage.html', items=user_items)
+
+@app.route('/update_item/<item_id>', methods=['POST'])
+def update_item(item_id):
+    if 'user_id' not in session:
+        return redirect(url_for('login'))
+
+    new_name = request.form['new_name']
+    new_quantity = request.form['new_quantity']
+    items.update_one({'_id': ObjectId(item_id)}, {'$set': {'name': new_name, 'quantity': new_quantity}})
+    return redirect(url_for('manage'))
+
+@app.route('/delete_item/<item_id>', methods=['POST'])
+def delete_item(item_id):
+    if 'user_id' not in session:
+        return redirect(url_for('login'))
+
+    items.delete_one({'_id': ObjectId(item_id)})
+    return redirect(url_for('manage'))
 
 @app.route('/logout')
 def logout():

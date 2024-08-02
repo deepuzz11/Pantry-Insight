@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Pantry Items</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='manage_styles.css') }}">
+</head>
+<body>
+    <header class="header">
+        <img src="{{ url_for('static', filename='logo.jpg') }}" alt="Logo">
+        <nav class="navbar">
+            <ul>
+                <li><a href="{{ url_for('index') }}">Home</a></li>
+                <li><a href="{{ url_for('logout') }}">Logout</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <h1>Manage Pantry Items</h1>
+        
+        <form method="POST" action="{{ url_for('manage') }}">
+            <input type="text" name="item_name" placeholder="Item Name" required>
+            <input type="number" name="item_quantity" placeholder="Quantity" required>
+            <button type="submit">Add Item</button>
+        </form>
+
+        <ul id="pantry-list">
+            {% for item in items %}
+            <li>
+                <form method="POST" action="{{ url_for('update_item', item_id=item._id) }}">
+                    <input type="text" name="new_name" value="{{ item.name }}" required>
+                    <input type="number" name="new_quantity" value="{{ item.quantity }}" required>
+                    <button type="submit">Update</button>
+                </form>
+                <form method="POST" action="{{ url_for('delete_item', item_id=item._id) }}">
+                    <button type="submit">Delete</button>
+                </form>
+            </li>
+            {% endfor %}
+        </ul>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Pantry Tracker. All rights reserved.</p>
+    </footer>
+</body>
+</html>
