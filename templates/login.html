@@ -26,7 +26,10 @@
             <input type="password" id="password" name="password" required>
             <button type="submit">Login</button>
         </form>
-        <a href="{{ url_for('auth') }}" class="btn">Sign in with Google</a>
+        <a href="{{ url_for('auth') }}" class="google-btn">
+            <img src="{{ url_for('static', filename='google-logo.png') }}" alt="Google Logo" class="google-logo">
+            Sign in with Google
+        </a>
         <p><a href="{{ url_for('signup') }}">Sign up</a> | <a href="{{ url_for('forgot_password') }}">Forgot Password?</a></p>
     </div>
 </body>

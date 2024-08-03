@@ -3,7 +3,7 @@ from pymongo import MongoClient
 from authlib.integrations.flask_client import OAuth
 from bson.objectid import ObjectId
 from werkzeug.security import generate_password_hash, check_password_hash
-
+import requests
 app = Flask(__name__)
 app.secret_key = 'deepika1104'
 
@@ -93,8 +93,8 @@ def auth_callback():
     if user:
         session['user_id'] = str(user['_id'])
     else:
-        # Optionally handle user creation
-        pass
+        flash('User not found. Please sign up.')
+        return redirect(url_for('signup'))
     return redirect(url_for('index'))
 
 @app.route('/forgot_password', methods=['GET', 'POST'])
@@ -147,6 +147,21 @@ def delete_item(item_id):
     items.delete_one({'_id': ObjectId(item_id)})
     return redirect(url_for('manage'))
 
+@app.route('/recipe_finder', methods=['GET', 'POST'])
+def recipe_finder():
+    recipes = []
+    if request.method == 'POST':
+        query = request.form['query']
+        app_id = '42f1a58d'
+        app_key = '0e469058d094261da120a3e09885d42f	'
+        url = f'https://api.edamam.com/api/recipes/v2?type=public&q={query}&app_id={app_id}&app_key={app_key}'
+        response = requests.get(url)
+        data = response.json()
+
+        # Extract recipes from the API response
+        recipes = data.get('hits', [])
+    
+    return render_template('recipe_finder.html', recipes=recipes)
 @app.route('/logout')
 def logout():
     session.pop('user_id', None)

@@ -1,6 +1,8 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sign Up</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
@@ -25,9 +27,11 @@
             
             <button type="submit">Sign Up</button>
         </form>
-        <a href="{{ url_for('auth') }}" class="btn">Sign up with Google</a>
+        <a href="{{ url_for('auth') }}" class="google-btn">
+            <img src="{{ url_for('static', filename='google-logo.png') }}" alt="Google Logo" class="google-logo">
+            Sign up with Google
+        </a>
         <p><a href="{{ url_for('login') }}">Already have an account? Login here</a></p>
     </div>
 </body>
 </html>
-

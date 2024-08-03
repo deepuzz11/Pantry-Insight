@@ -69,3 +69,44 @@ a:hover {
     margin: 20px 0;
     color: red;
 }
+/* Google Sign-In button styling */
+.google-btn {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    background-color: #4285F4; /* Google Blue */
+    color: #fff;
+    font-weight: bold;
+    border-radius: 4px;
+    text-decoration: none;
+    margin-top: 15px;
+    border: 1px solid #4285F4;
+    transition: background-color 0.3s, border-color 0.3s;
+    justify-content: center;
+}
+
+.google-btn:hover {
+    background-color: #357ae8; /* Darker blue on hover */
+    border-color: #357ae8;
+}
+
+.google-logo {
+    width: 24px;
+    height: 24px;
+    margin-right: 10px;
+}
+
+/* Additional adjustments for buttons to maintain consistency */
+button {
+    padding: 10px;
+    background-color: #28a745; /* Green for other buttons */
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #218838; /* Darker green on hover */
+}
+
