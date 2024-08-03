@@ -1,11 +1,26 @@
 from flask import Flask, render_template, request, redirect, url_for, session, flash, jsonify
 from pymongo import MongoClient
+from authlib.integrations.flask_client import OAuth
 from bson.objectid import ObjectId
 from werkzeug.security import generate_password_hash, check_password_hash
-import requests
 
 app = Flask(__name__)
 app.secret_key = 'deepika1104'
+
+# Google OAuth setup
+oauth = OAuth(app)
+google = oauth.register(
+    name='google',
+    client_id='1057868793314-ed737iea8kpcnukf2inelhh6l6ddi7k1.apps.googleusercontent.com',
+    client_secret='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',
+    authorize_url='https://accounts.google.com/o/oauth2/auth',
+    authorize_params=None,
+    access_token_url='https://accounts.google.com/o/oauth2/token',
+    access_token_params=None,
+    refresh_token_url=None,
+    redirect_uri='http://127.0.0.1:5000/auth/callback',
+    client_kwargs={'scope': 'openid profile email'},
+)
 
 # MongoDB setup
 client = MongoClient('mongodb://localhost:27017/')
@@ -18,50 +33,6 @@ items = db['items']
 # Create indexes for better performance (optional)
 users.create_index('email', unique=True)
 items.create_index('user_id')
-
-@app.route('/recipes', methods=['GET', 'POST'])
-def recipes():
-    if 'user_id' not in session:
-        return redirect(url_for('login'))
-
-    if request.method == 'POST':
-        pantry_items = request.form.getlist('pantry_items')
-        if pantry_items:
-            recipes = get_recipe_suggestions(pantry_items)
-            return render_template('manage_pantry.html', items=items.find({'user_id': ObjectId(session['user_id'])}), recipes=recipes)
-    
-    return render_template('manage_pantry.html', items=items.find({'user_id': ObjectId(session['user_id'])}), recipes=[])
-
-def get_recipe_suggestions(pantry_items):
-    app_id = '42f1a58d'
-    api_key = '91ddd9fe0e09eb04fe9a2f657d19322f'
-    url = 'https://api.edamam.com/search'
-    
-    query = ' '.join(pantry_items)
-    params = {
-        'q': query,
-        'app_id': app_id,
-        'app_key': api_key
-    }
-    
-    response = requests.get(url, params=params)
-    data = response.json()
-    
-    return data.get('hits', [])
-
-@app.route('/recipe_finder', methods=['GET', 'POST'])
-def recipe_finder():
-    if 'user_id' not in session:
-        return redirect(url_for('login'))
-
-    recipes = []
-    if request.method == 'POST':
-        ingredients = request.form.get('query')  # Corrected to match HTML form field name
-        if ingredients:
-            pantry_items = [item.strip() for item in ingredients.split(',')]
-            recipes = get_recipe_suggestions(pantry_items)
-
-    return render_template('recipe_finder.html', recipes=recipes)
 
 @app.route('/')
 def index():
@@ -107,6 +78,24 @@ def signup():
         except Exception as e:
             flash('Email already registered')
     return render_template('signup.html')
+
+@app.route('/auth')
+def auth():
+    redirect_uri = url_for('auth_callback', _external=True)
+    return google.authorize_redirect(redirect_uri)
+
+@app.route('/auth/callback')
+def auth_callback():
+    token = google.authorize_access_token()
+    user_info = google.parse_id_token(token)
+    email = user_info['email']
+    user = users.find_one({'email': email})
+    if user:
+        session['user_id'] = str(user['_id'])
+    else:
+        # Optionally handle user creation
+        pass
+    return redirect(url_for('index'))
 
 @app.route('/forgot_password', methods=['GET', 'POST'])
 def forgot_password():
