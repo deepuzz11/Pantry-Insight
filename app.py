@@ -2,6 +2,7 @@ from flask import Flask, render_template, request, redirect, url_for, session, f
 from pymongo import MongoClient
 from bson.objectid import ObjectId
 from werkzeug.security import generate_password_hash, check_password_hash
+import requests
 
 app = Flask(__name__)
 app.secret_key = 'deepika1104'
@@ -17,6 +18,50 @@ items = db['items']
 # Create indexes for better performance (optional)
 users.create_index('email', unique=True)
 items.create_index('user_id')
+
+@app.route('/recipes', methods=['GET', 'POST'])
+def recipes():
+    if 'user_id' not in session:
+        return redirect(url_for('login'))
+
+    if request.method == 'POST':
+        pantry_items = request.form.getlist('pantry_items')
+        if pantry_items:
+            recipes = get_recipe_suggestions(pantry_items)
+            return render_template('manage_pantry.html', items=items.find({'user_id': ObjectId(session['user_id'])}), recipes=recipes)
+    
+    return render_template('manage_pantry.html', items=items.find({'user_id': ObjectId(session['user_id'])}), recipes=[])
+
+def get_recipe_suggestions(pantry_items):
+    app_id = '42f1a58d'
+    api_key = '91ddd9fe0e09eb04fe9a2f657d19322f'
+    url = 'https://api.edamam.com/search'
+    
+    query = ' '.join(pantry_items)
+    params = {
+        'q': query,
+        'app_id': app_id,
+        'app_key': api_key
+    }
+    
+    response = requests.get(url, params=params)
+    data = response.json()
+    
+    return data.get('hits', [])
+
+@app.route('/recipe_finder', methods=['GET', 'POST'])
+def recipe_finder():
+    if 'user_id' not in session:
+        return redirect(url_for('login'))
+
+    recipes = []
+    if request.method == 'POST':
+        ingredients = request.form.get('query')  # Corrected to match HTML form field name
+        if ingredients:
+            pantry_items = [item.strip() for item in ingredients.split(',')]
+            recipes = get_recipe_suggestions(pantry_items)
+
+    return render_template('recipe_finder.html', recipes=recipes)
 
 @app.route('/')
 def index():

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recipe Finder</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='manage_styles.css') }}">
+    <style>
+        .recipe-item {
+            margin-bottom: 30px; /* Adds space between recipes */
+        }
+        .recipe-title {
+            font-size: 1.5em;
+            font-weight: bold;
+            margin-bottom: 10px; /* Space below the recipe title */
+        }
+        .recipe-image {
+            width: 100%;
+            max-width: 400px;
+            height: auto;
+            margin-bottom: 10px; /* Space below the image */
+        }
+        .ingredients-list {
+            list-style-type: disc;
+            padding-left: 20px; /* Adds space to the left of the list */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <nav class="navbar">
+                <ul>
+                    <li><a href="{{ url_for('index') }}" class="btn">Home</a></li>
+                    <li><a href="{{ url_for('manage') }}" class="btn">Manage Pantry</a></li>
+                    <li><a href="{{ url_for('logout') }}" class="btn">Logout</a></li>
+                </ul>
+            </nav>
+        </header>
+        
+        <main>
+            <h1>Recipe Finder</h1>
+            <form action="{{ url_for('recipe_finder') }}" method="POST">
+                <label for="query">Enter Ingredients (comma separated):</label>
+                <input type="text" id="query" name="query" required>
+                <button type="submit" class="btn">Find Recipes</button>
+            </form>
+            
+            {% if recipes %}
+                <h2>Recipe Suggestions:</h2>
+                <ul>
+                    {% for recipe in recipes %}
+                        <li class="recipe-item">
+                            <!-- Recipe Title -->
+                            <div class="recipe-title">
+                                <a href="{{ recipe.recipe.url }}" target="_blank">{{ recipe.recipe.label }}</a>
+                            </div>
+
+                            <!-- Recipe Image -->
+                            <img src="{{ recipe.recipe.image }}" alt="{{ recipe.recipe.label }}" class="recipe-image">
+
+                            <!-- Ingredients -->
+                            <div>
+                                <p><strong>Ingredients:</strong></p>
+                                <ul class="ingredients-list">
+                                    {% for ingredient in recipe.recipe.ingredients %}
+                                        <li>{{ ingredient.text }} ({{ ingredient.quantity }} {{ ingredient.measure }})</li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        </main>
+    </div>
+</body>
+</html>

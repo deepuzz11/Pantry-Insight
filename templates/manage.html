@@ -8,10 +8,11 @@
 </head>
 <body>
     <header class="header">
-        <img src="{{ url_for('static', filename='logo.jpg') }}" alt="Logo">
+        <img src="{{ url_for('static', filename='logo.jpg') }}" alt="Logo" class="logo">
         <nav class="navbar">
             <ul>
                 <li><a href="{{ url_for('index') }}">Home</a></li>
+                <li><a href="{{ url_for('recipe_finder') }}">Recipe Finder</a></li>
                 <li><a href="{{ url_for('logout') }}">Logout</a></li>
             </ul>
         </nav>
