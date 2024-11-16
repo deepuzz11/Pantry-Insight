@@ -113,5 +113,4 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## Acknowledgments
 
 - **Edamam** for providing the Recipe Search API.
-- **Material UI** for user interface components (if used).
 - **Google** for the authentication service.
